@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NewTodoForm from "./NewTodoForm";
 import Todos from "./Todos";
 import style from "./style/home.module.css";
+import { v4 as uuidv4 } from "uuid";
 
 // const todos = [
 //   {
@@ -27,19 +28,21 @@ export default function Home() {
   const todoCarrer = (todo) => {
     console.log(todo);
 
-    setTodos(
-      (prevTodos)=>{
-        return [...prevTodos, todo]
-      }
-    );
+    setTodos((prevTodos) => {
+      return [...prevTodos, { id: uuidv4(), todo }];
+    });
   };
-  console.log(todos);
+  // console.log(todos);
+  const idCarryer = (id) => {
+    const filteredTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(filteredTodos);
+  };
 
   return (
     <div className={style.home}>
       <h2>Todo Application</h2>
       <NewTodoForm onCarrer={todoCarrer} />
-      <Todos todos={todos} />
+      <Todos todos={todos} idCarryer={idCarryer} />
     </div>
   );
 }

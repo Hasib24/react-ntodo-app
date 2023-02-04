@@ -7,7 +7,7 @@ export default function NewTodoForm(props) {
 
   const changeHandler = (e) => {
     const name = e.target.name;
-    console.log(name);
+    // console.log(name);
     setNewTodo((oldValeu) => {
       return {...oldValeu, [name]: e.target.value };
     });
